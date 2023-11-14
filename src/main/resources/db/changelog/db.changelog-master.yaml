@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/v.1.0.0/2023-11-14-create-table.yml
+  - include:
+      file: db/changelog/v.1.0.0/2023-11-14-load-data-table.yml

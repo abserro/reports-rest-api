@@ -1,0 +1,68 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: abszerro
+      changes:
+        - createTable:
+            tableName: nba_player_list
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: display_first_last
+                  type: VARCHAR(255)
+              - column:
+                  name: display_last_comma_first
+                  type: VARCHAR(255)
+              - column:
+                  name: from_year
+                  type: INTEGER
+                  constraints:
+                    checkConstraint: 'from_year >= 1900 AND from_year <= 2050'
+              - column:
+                  name: games_played_flag
+                  type: CHAR(1)
+              - column:
+                  name: otherleague_experience_ch
+                  type: INTEGER
+                  constraints:
+                    checkConstraint: 'otherleague_experience_ch >= 0 AND otherleague_experience_ch <= 11'
+              - column:
+                  name: person_id
+                  type: BIGINT
+              - column:
+                  name: playercode
+                  type: VARCHAR(255)
+              - column:
+                  name: rosterstatus
+                  type: INTEGER
+                  constraints:
+                    checkConstraint: 'rosterstatus in (0, 1)'
+              - column:
+                  name: team_abbreviation
+                  type: VARCHAR(255)
+              #                  nullable: true
+              - column:
+                  name: team_city
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: team_code
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: team_id
+                  type: BIGINT
+              - column:
+                  name: team_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: to_year
+                  type: INTEGER
