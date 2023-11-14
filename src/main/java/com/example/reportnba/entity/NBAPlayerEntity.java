@@ -8,45 +8,74 @@ import javax.validation.constraints.*;
 public class NBAPlayerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
     @NotBlank(message = "DisplayFirstLast is required")
     @Size(max = 255, message = "DisplayFirstLast cannot be longer than 255 characters")
+    @Column(name = "display_first_last")
     private String displayFirstLast;
+
     @NotBlank(message = "DisplayLastCommaFirst is required")
     @Size(max = 255, message = "DisplayLastCommaFirst cannot be longer than 255 characters")
+    @Column(name = "display_last_comma_first")
     private String displayLastCommaFirst;
+
     @NotNull(message = "FromYear is required")
     @Max(2050)
     @Min(1900)
+    @Column(name = "from_year")
     private Integer fromYear;
+
     @NotBlank(message = "GamesPlayedFlag is required")
+    @Column(name = "games_played_flag")
     private Character gamesPlayedFlag;
+
     @NotNull(message = "OtherleagueExperienceCh is required")
     @Max(0)
     @Min(11)
+    @Column(name = "otherleague_experience_ch")
     private Integer otherleagueExperienceCh;
+
     @NotNull(message = "PersonId is required")
+    @Column(name = "person_id")
     private Long personId;
+
     @NotBlank(message = "Playercode is required")
     @Size(max = 255, message = "Playercode cannot be longer than 255 characters")
+    @Column(name = "playercode")
     private String playercode;
+
     @NotNull(message = "Rosterstatus is required")
     @Max(0)
     @Min(1)
+    @Column(name = "rosterstatus")
     private Integer rosterstatus;
+
     @Size(max = 255, message = "TeamAbbreviation cannot be longer than 255 characters")
+    @Column(name = "team_abbreviation")
     private String teamAbbreviation;
+
     @Size(max = 255, message = "TeamCity cannot be longer than 255 characters")
+    @Column(name = "team_city")
     private String teamCity;
+
     @Size(max = 255, message = "TeamCode cannot be longer than 255 characters")
+    @Column(name = "team_code")
     private String teamCode;
+
     @NotNull(message = "TeamId is required")
+    @Column(name = "team_id")
     private Long teamId;
+
     @Size(max = 255, message = "TeamName cannot be longer than 255 characters")
+    @Column(name = "team_name")
     private String teamName;
+
     @NotNull(message = "ToYear is required")
     @Max(2050)
     @Min(1900)
+    @Column(name = "to_year")
     private Integer toYear;
 
     public Long getId() {
