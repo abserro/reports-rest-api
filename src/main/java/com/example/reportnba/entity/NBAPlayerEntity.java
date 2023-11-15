@@ -2,6 +2,7 @@ package com.example.reportnba.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "nba_player_list")
@@ -196,5 +197,20 @@ public class NBAPlayerEntity {
 
     public void setToYear(Integer toYear) {
         this.toYear = toYear;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NBAPlayerEntity that = (NBAPlayerEntity) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(personId, that.personId) &&
+                Objects.equals(teamId, that.teamId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, personId, teamId);
     }
 }
