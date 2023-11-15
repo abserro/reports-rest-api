@@ -1,6 +1,6 @@
 package com.example.reportnba.report;
 
-public interface ReportCountPlayersByTeam {
+public interface IReportCountPlayersByTeam {
     Long getTeamId();
     String getTeamCode();
     String getTeamCity();

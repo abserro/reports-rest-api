@@ -1,6 +1,6 @@
 package com.example.reportnba.report;
 
-public interface ReportLongestCareer {
+public interface IReportLongestCareer {
     Long getPersonId();
     String getDisplayFirstLast();
     Integer getFromYear();

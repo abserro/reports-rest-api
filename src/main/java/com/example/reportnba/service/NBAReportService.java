@@ -1,8 +1,8 @@
 package com.example.reportnba.service;
 
-import com.example.reportnba.report.ReportCountPlayersByTeam;
-import com.example.reportnba.repository.NBAPlayerRepository;
-import com.example.reportnba.report.ReportLongestCareer;
+import com.example.reportnba.report.IReportCountPlayersByTeam;
+import com.example.reportnba.repository.INBAReportRepository;
+import com.example.reportnba.report.IReportLongestCareer;
 import liquibase.util.csv.CSVWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -13,26 +13,26 @@ import java.io.StringWriter;
 import java.util.List;
 
 @Service
-public class NBAPlayerService {
-    private final NBAPlayerRepository repository;
+public class NBAReportService {
+    private final INBAReportRepository repository;
 
     @Autowired
-    public NBAPlayerService(NBAPlayerRepository repository) {
+    public NBAReportService(INBAReportRepository repository) {
         this.repository = repository;
     }
 
-    public List<ReportLongestCareer> getLongestCareers() {
+    public List<IReportLongestCareer> getLongestCareers() {
         Pageable pageable = PageRequest.of(0, 20);
         return repository.findPlayersByLongestCareer(pageable);
     }
 
-    public List<ReportCountPlayersByTeam> getCountPlayersByTeam() {
+    public List<IReportCountPlayersByTeam> getCountPlayersByTeam() {
         return repository.countPlayersByTeam();
     }
 
     public String getLongestCareersCSV() {
         Pageable pageable = PageRequest.of(0, 20);
-        List<ReportLongestCareer> report = repository.findPlayersByLongestCareer(pageable); // Используйте Object[] или создайте DTO класс
+        List<IReportLongestCareer> report = repository.findPlayersByLongestCareer(pageable); // Используйте Object[] или создайте DTO класс
 
         try (StringWriter writer = new StringWriter();
              CSVWriter csvWriter = new CSVWriter(writer)) {
@@ -41,7 +41,7 @@ public class NBAPlayerService {
             csvWriter.writeNext(new String[]{"Person ID", "Player Name", "From Year", "To Year", "Career Duration"});
 
             // Добавьте данные
-            for (ReportLongestCareer player : report) {
+            for (IReportLongestCareer player : report) {
                 // Преобразуйте объекты в массив строк, соответствующих столбцам CSV
                 String[] csvRow = {
                         String.valueOf(player.getPersonId()),         // Person ID
@@ -62,7 +62,7 @@ public class NBAPlayerService {
     }
 
     public String getCountPlayersByTeamCSV() {
-        List<ReportCountPlayersByTeam> report = repository.countPlayersByTeam();
+        List<IReportCountPlayersByTeam> report = repository.countPlayersByTeam();
 
         try (StringWriter writer = new StringWriter();
              CSVWriter csvWriter = new CSVWriter(writer)) {
@@ -71,7 +71,7 @@ public class NBAPlayerService {
             csvWriter.writeNext(new String[]{"Team ID", "Team Code", "Team City", "Team Abbreviation", "Team Name", "Count"});
 
             // Добавьте данные
-            for (ReportCountPlayersByTeam team : report) {
+            for (IReportCountPlayersByTeam team : report) {
                 // Преобразуйте объекты в массив строк, соответствующих столбцам CSV
                 String[] csvRow = {
                         String.valueOf(team.getTeamId()),                  // Team ID

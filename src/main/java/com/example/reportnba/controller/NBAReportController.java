@@ -1,9 +1,9 @@
 package com.example.reportnba.controller;
 
-import com.example.reportnba.report.ReportCountPlayersByTeam;
-import com.example.reportnba.repository.NBAPlayerRepository;
-import com.example.reportnba.report.ReportLongestCareer;
-import com.example.reportnba.service.NBAPlayerService;
+import com.example.reportnba.report.IReportCountPlayersByTeam;
+import com.example.reportnba.repository.INBAReportRepository;
+import com.example.reportnba.report.IReportLongestCareer;
+import com.example.reportnba.service.NBAReportService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -19,19 +19,19 @@ import java.util.List;
 @Tag(name = "NBAReport")
 @RestController
 @RequestMapping(path = "api/v1/nba-players")
-public class NBAPlayerController {
-    private final NBAPlayerService service;
+public class NBAReportController {
+    private final NBAReportService service;
 
     @Autowired
-    public NBAPlayerController(NBAPlayerRepository repository) {
-        this.service = new NBAPlayerService(repository);
+    public NBAReportController(INBAReportRepository repository) {
+        this.service = new NBAReportService(repository);
     }
 
     @GetMapping("/report-longest-careers")
     public ResponseEntity<?> getReportLongestCareers(@RequestParam(name = "format", defaultValue = "json") String format) {
         switch (format) {
             case "json"->{
-                List<ReportLongestCareer> players = service.getLongestCareers();
+                List<IReportLongestCareer> players = service.getLongestCareers();
                 return players.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(players);
             }
             case "csv"->{
@@ -51,7 +51,7 @@ public class NBAPlayerController {
     public ResponseEntity<?> getCountPlayersByTeam(@RequestParam(name = "format", defaultValue = "json") String format) {
         switch (format) {
             case "json"->{
-                List<ReportCountPlayersByTeam> players = service.getCountPlayersByTeam();
+                List<IReportCountPlayersByTeam> players = service.getCountPlayersByTeam();
                 return players.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(players);
             }
             case "csv"->{
