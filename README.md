@@ -76,6 +76,8 @@ _Аналогичный ответ для второго отчета_
    
    <img src="https://github.com/abserro/reports-rest-api/assets/107203406/8dc0e6a9-e62f-4e2e-90a1-3a3bd38c1488" height="50%"> 
 
+    _Было выбрано Java Persistence API (JPA) с расчетом на расширение в RESTful_  
+    
 2. Создание базы данных (**nba_player_db**) в PostgreSQL (pgAdmin)
 
 3. Создание миграций:
@@ -87,14 +89,14 @@ _Аналогичный ответ для второго отчета_
       _**ПРИМЕЧАНИЕ**: исходный файл "[NBA-playerlist.csv](https://github.com/abserro/reports-rest-api/blob/master/src/main/resources/csv/NBA-playerlist.csv)" был изменен: удалены пронумерованные значения в первом столбце и заменены на автоинкремент_
       
 4. Работа с запросами на отчет (JPQL)  
-    1)
+    i
    ```jpql
    SELECT p.personId as personId, p.displayFirstLast as displayFirstLast, p.fromYear as fromYear, p.toYear as toYear, (p.toYear - p.fromYear) as career
    FROM NBAPlayerEntity p
    ORDER BY (p.toYear - p.fromYear) DESC, p.personId
    ```
-   
-    2) 
+
+   ii 
     ```jpql
     SELECT p.teamId as teamId, p.teamCode as teamCode, p.teamCity as teamCity, p.teamAbbreviation as teamAbbreviation, p.teamName as teamName, COUNT(p) as count
     FROM NBAPlayerEntity p
@@ -103,6 +105,20 @@ _Аналогичный ответ для второго отчета_
     ORDER BY COUNT(p) DESC
    ```
     
-5. Создание GET-запросов для получения отчетов в форматах JSON и CSV
-6. Связывание репозитория и контроллера через сервис
-7. Добавление дополнительной логики в сервис
+6. Создание GET-запросов для получения отчетов в форматах JSON и CSV
+
+   ```java  
+   @GetMapping("/report-count-players-by-team")
+    public ResponseEntity<?> getCountPlayersByTeam(@RequestParam(name = "format", defaultValue = "json") String format) {
+        //
+    }
+   ```  
+   ```java  
+   @GetMapping("/report-longest-careers")
+    public ResponseEntity<?> getReportLongestCareers(@RequestParam(name = "format", defaultValue = "json") String format) {
+        //
+    }  
+   ```
+   
+8. Связывание репозитория и контроллера через сервис
+9. Добавление дополнительной логики в сервис
