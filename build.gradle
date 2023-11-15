@@ -5,8 +5,8 @@ plugins {
 	id 'io.swagger.core.v3.swagger-gradle-plugin' version '2.2.2'
 }
 
-group = 'reg.mos'
-version = '0.0.3-SNAPSHOT'
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
 configurations {
@@ -22,15 +22,6 @@ repositories {
 	}
 }
 
-springBoot {
-	mainClass = 'reg.mos.iskp.IskpApplication'
-	buildInfo()
-}
-
-ext {
-	set('snippetsDir', file("build/generated-snippets"))
-}
-
 dependencies {
 	// Spring Boot
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
@@ -44,10 +35,7 @@ dependencies {
 	implementation 'io.springfox:springfox-swagger2:2.9.2'
 
 	// Liquibase
-	implementation("org.liquibase:liquibase-core")
-
-	// Jackon
-	implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
+	implementation 'org.liquibase:liquibase-core'
 
 	// PostgreSQL
 	runtimeOnly 'org.postgresql:postgresql'

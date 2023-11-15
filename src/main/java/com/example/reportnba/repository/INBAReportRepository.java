@@ -20,6 +20,7 @@ public interface INBAReportRepository extends JpaRepository<NBAPlayerEntity, Lon
     @Query("SELECT p.teamId as teamId, p.teamCode as teamCode, p.teamCity as teamCity, p.teamAbbreviation as teamAbbreviation, p.teamName as teamName, COUNT(p) as count " +
             "FROM NBAPlayerEntity p " +
             "WHERE p.teamName != '' AND p.teamName IS NOT NULL " +
-            "GROUP BY p.teamName, p.teamId, p.teamCode, p.teamCity, p.teamAbbreviation")
+            "GROUP BY p.teamName, p.teamId, p.teamCode, p.teamCity, p.teamAbbreviation " +
+            "ORDER BY COUNT(p) DESC")
     List<IReportCountPlayersByTeam> countPlayersByTeam();
 }
